@@ -439,7 +439,7 @@ ActionTimeline* ActionTimelineCache::loadAnimationActionWithFlatBuffersFile(cons
     float speed = nodeAction->speed();
     action->setTimeSpeed(speed);
     
-    auto animationList = nodeAction->animationList();
+    auto animationList = csparsebinary->animationList();
     if(animationList)
     {
         auto animationLength = animationList->size();

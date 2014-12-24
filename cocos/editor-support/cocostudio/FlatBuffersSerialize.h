@@ -66,6 +66,7 @@ namespace flatbuffers
     struct TextAtlasOptions;
     
     
+    struct AnimationInfo;
     struct NodeAction;
     struct TimeLine;
     struct Frame;
@@ -117,6 +118,10 @@ public:
     flatbuffers::Offset<flatbuffers::TimeLineColorFrame> createTimeLineColorFrame(const tinyxml2::XMLElement* objectData);
     flatbuffers::Offset<flatbuffers::TimeLineTextureFrame> createTimeLineTextureFrame(const tinyxml2::XMLElement* objectData);
     /**/
+    
+    // AnimaitonInfo
+    flatbuffers::Offset<flatbuffers::AnimationInfo> createAnimationInfo(const tinyxml2::XMLElement* objectData);
+    
     
     int getResourceType(std::string key);
     std::string getGUIClassName(const std::string &name);
