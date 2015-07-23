@@ -362,6 +362,7 @@ void BoneNode::updateVertices()
 {
     if (_rackLength != _squareVertices[2].x - _anchorPointInPoints.x || _squareVertices[3].y != _rackWidth / 2 - _anchorPointInPoints.y)
     {
+        _squareVertices[1].x = _squareVertices[1].y = _squareVertices[3].y = .0f;
         _squareVertices[0].x = _squareVertices[2].x = _rackLength * .1f;
         _squareVertices[2].y = _rackWidth * .5f;
         _squareVertices[0].y = -_squareVertices[2].y;
@@ -479,20 +480,21 @@ SkeletonNode* BoneNode::getRootSkeletonNode() const
 #ifdef CC_STUDIO_ENABLED_VIEW
 bool BoneNode::isPointOnRack(const cocos2d::Vec2& bonePoint)
 {
-    if (bonePoint.x >= _squareVertices[1].x && bonePoint.y >= _squareVertices[0].y
+    if (bonePoint.x >= 0.0f && bonePoint.y >= _squareVertices[0].y
         && bonePoint.x <= _rackLength &&
         bonePoint.y <= _squareVertices[2].y)
     {
         if (_rackLength != 0.0f && _rackWidth != 0.0f)
         {
-            float a1 = _squareVertices[2].y / (_squareVertices[3].x - _squareVertices[0].x);
-            float a2 = _squareVertices[2].y / _squareVertices[2].x;
-            float b1 = a1 * _squareVertices[3].x;
+            float a1 = _squareVertices[1].y / (_squareVertices[3].x - _squareVertices[0].x);
+            float a2 = _squareVertices[1].y / _squareVertices[0].x;
+            float b1 = a1 * _squareVertices[0].x;
+            float b2 = a1 * _squareVertices[3].x + _squareVertices[1].y;
 
             if (bonePoint.y >= a1 * bonePoint.x - b1 &&
-                bonePoint.y <= a2 * bonePoint.x &&
-                bonePoint.y <= -a1 * bonePoint.x + b1 &&
-                bonePoint.y >= -a2 * bonePoint.x )
+                bonePoint.y <= a2 * bonePoint.x + _squareVertices[1].y &&
+                bonePoint.y >= -a2 * bonePoint.x + _squareVertices[1].y &&
+                bonePoint.y <= -a1 * bonePoint.x + b2)
                 return true;
         }
     }

@@ -135,6 +135,9 @@ public:
 
     virtual void setAnchorPoint(const cocos2d::Vec2& anchorPoint);
 
+    cocos2d::AffineTransform getBoneToSkeletonAffineTransform() const;
+    cocos2d::Mat4 getBoneToSkeletonTransform() const;
+
 #ifdef CC_STUDIO_ENABLED_VIEW
     // hit test , bonePoint is in self coordinate
     virtual bool isPointOnRack(const cocos2d::Vec2& bonePoint);

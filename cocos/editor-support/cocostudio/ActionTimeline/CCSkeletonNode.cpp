@@ -115,7 +115,9 @@ void SkeletonNode::updateVertices()
         const float radiusw = _rackWidth * .5f;
         const float radiusl_2 = radiusl * .25f;
         const float radiusw_2 = radiusw * .25f;
-        _squareVertices[5].x = -radiusl; _squareVertices[5].x = -radiusl;
+        _squareVertices[5].y = _squareVertices[2].y = _squareVertices[1].y = _squareVertices[6].y
+            = _squareVertices[0].x = _squareVertices[4].x = _squareVertices[7].x = _squareVertices[3].x = .0f;
+        _squareVertices[5].x = -radiusl; _squareVertices[0].y = -radiusw;
         _squareVertices[6].x =  radiusl;  _squareVertices[3].y = radiusw;
         _squareVertices[1].x =  radiusl_2; _squareVertices[7].y = radiusw_2;
         _squareVertices[2].x = - radiusl_2; _squareVertices[4].y = - radiusw_2;
