@@ -43,9 +43,8 @@ Timeline* Timeline::create()
 
 Timeline::Timeline()
     : _currentKeyFrame(nullptr)
-    , _currentKeyFrameIndex(0)
-    , _fromIndex(0)
-    , _toIndex(0)
+    , _prevFrame(nullptr)
+    , _nextFrame(nullptr)
     , _betweenDuration(0)
     , _actionTag(0)
     , _ActionTimeline(nullptr)
@@ -62,7 +61,7 @@ void Timeline::gotoFrame(int frameIndex)
     if(_frames.size() == 0)
         return;
 
-    binarySearchKeyFrame(frameIndex);
+    searchKeyFrame(frameIndex);
     apply(frameIndex);
 }
 
@@ -80,8 +79,9 @@ Timeline* Timeline::clone()
     Timeline* timeline = Timeline::create();
     timeline->_actionTag = _actionTag;
 
-    for (auto frame : _frames)
-    {
+    for (const auto& pair : _frames)
+    {	
+		auto frame = pair.second;
         Frame* newFrame = frame->clone();
         timeline->addFrame(newFrame);
     }
@@ -91,27 +91,29 @@ Timeline* Timeline::clone()
 
 void Timeline::addFrame(Frame* frame)
 {
-    _frames.pushBack(frame);
+	_frames.insert(std::make_pair(frame->getFrameIndex(), frame));
     frame->setTimeline(this);
 }
 
 void Timeline::insertFrame(Frame* frame, int index)
 {
-    _frames.insert(index, frame);
-    frame->setTimeline(this);
+	addFrame(frame);
 }
 
 void Timeline::removeFrame(Frame* frame)
 {
-    _frames.eraseObject(frame);
-    frame->setTimeline(nullptr);
+	auto toBeRemoveIter = _frames.find(frame->getFrameIndex());
+	if (toBeRemoveIter != _frames.end())
+	{
+		toBeRemoveIter->second->setTimeline(nullptr);
+	}
 }
 
 void Timeline::setNode(Node* node)
 {
-    for (auto frame : _frames)
+    for (auto pair : _frames)
     {
-        frame->setNode(node);
+        pair.second->setNode(node);
     }
 }
 
@@ -129,8 +131,41 @@ void Timeline::apply(unsigned int frameIndex)
     }
 }
 
-void Timeline::binarySearchKeyFrame(unsigned int frameIndex)
+void Timeline::searchKeyFrame(unsigned int frameIndex)
 {
+	if (_frames.empty())
+		return;
+
+	auto frameIter = _frames.begin();
+	auto iterFrameIndex = frameIter->second->getFrameIndex();
+	do
+	{
+		if (frameIndex < iterFrameIndex)
+			break;
+
+		for (; frameIter != _frames.end(); frameIter++)
+		{
+			iterFrameIndex = frameIter->second->getFrameIndex();
+			if (iterFrameIndex == frameIndex)
+				break;
+
+			if (frameIndex < iterFrameIndex)
+			{
+				frameIter--;
+				break;
+			}
+		}
+	} while (false);
+
+	_currentKeyFrame = frameIter->second;
+	_currentKeyFrameIndex = _currentKeyFrame->getFrameIndex();
+	_prevFrame = getPrevKeyFrame();
+	_nextFrame = getNextKeyFrame();
+	_betweenDuration = (_nextFrame->getFrameIndex() - _prevFrame->getFrameIndex());
+
+	if (frameIter == _frames.begin())
+		frameIter = _frames.end();
+
     Frame *from = nullptr;
     Frame *to   = nullptr;
 
@@ -207,8 +242,9 @@ void Timeline::updateCurrentKeyFrame(unsigned int frameIndex)
     //! If play to current frame's front or back, then find current frame again
     if (frameIndex < _currentKeyFrameIndex || frameIndex >= _currentKeyFrameIndex + _betweenDuration)
     {
-        Frame *from = nullptr;
-        Frame *to = nullptr;
+
+		_nextFrame = getNextKeyFrame(_currentKeyFrameIndex);
+		_prevFrame = getPrevKeyFrame(_currentKeyFrameIndex);
 
         do 
         {
@@ -263,6 +299,27 @@ void Timeline::updateCurrentKeyFrame(unsigned int frameIndex)
         _currentKeyFrame->onEnter(to, frameIndex);
         
     }
+}
+
+Frame* Timeline::getPrevKeyFrame()
+{
+	auto frameIter = _frames.find(_currentKeyFrameIndex);
+	if (frameIter != _frames.begin())
+	{
+		frameIter--;
+	}
+	return frameIter->second;
+}
+
+Frame* Timeline::getNextKeyFrame()
+{
+	auto frameIter = _frames.find(_currentKeyFrameIndex);
+	frameIter++;
+	if (frameIter != _frames.end())
+	{
+		return frameIter->second;
+	}
+	return _frames.at(currentFrameIndex);
 }
 
 NS_TIMELINE_END

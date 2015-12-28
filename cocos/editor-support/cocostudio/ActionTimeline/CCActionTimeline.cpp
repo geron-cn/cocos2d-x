@@ -441,4 +441,10 @@ void ActionTimeline::stepToFrame(int frameIndex)
     }
 }
 
+ActionTimeline* ActionTimeline::reverse() const
+{
+	int frontIndex = 0;
+	int endIndex = _duration;
+}
+
 NS_TIMELINE_END

@@ -47,6 +47,9 @@ public:
     virtual const cocos2d::Vector<Frame*>& getFrames() const { return _frames; }
 
     virtual void addFrame(Frame* frame);
+
+	/** @deprecated, use addFrame(Frame* frame) instead
+	*/
     virtual void insertFrame(Frame* frame, int index);
     virtual void removeFrame(Frame* frame);
 
@@ -64,20 +67,26 @@ public:
 protected:
     virtual void apply(unsigned int frameIndex);
 
-    virtual void binarySearchKeyFrame (unsigned int frameIndex);
+    virtual void searchKeyFrame (unsigned int frameIndex);
     virtual void updateCurrentKeyFrame(unsigned int frameIndex);
 
-    cocos2d::Vector<Frame*> _frames;
+	std::map<int, Frame*> _frames;
     Frame* _currentKeyFrame;
     unsigned int _currentKeyFrameIndex;
 
-	unsigned int _fromIndex;
-	unsigned int _toIndex;
+	Frame* _prevFrame;
+	Frame* _nextFrame;
 	unsigned int _betweenDuration;
 	unsigned int _actionTag;
 
     ActionTimeline*  _ActionTimeline;
-    cocos2d::Node* _node;
+	cocos2d::Node* _node;
+
+private:
+	// get preview Frame, return currentFrame if current frame is the first frame
+	Frame* getPrevKeyFrame(int currentKeyFrameIndex);
+	// get next frame, return currentFrame if current frame is the last frame
+	Frame* getNextKeyFrame(int currentKeyFrameIndex);
 };
 
 NS_TIMELINE_END
