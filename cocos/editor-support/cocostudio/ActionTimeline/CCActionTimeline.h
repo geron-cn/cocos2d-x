@@ -192,14 +192,23 @@ public:
      *  Not implement yet.
      */
     virtual ActionTimeline* reverse() const override { return nullptr; }
-
+    
+    /** blending play to animation from now with Liner tween in deltaTime
+     * @param isLoop whether or not the animation need loop play
+     * @param deltaTime should larger than _frameInternal at least
+     */
+    virtual void blendingPlay(std::string animationName, bool isLoop, double deltaTime, cocos2d::tweenfunc::TweenType tweenType);
+    
     virtual void step(float delta) override; 
     virtual void startWithTarget(cocos2d::Node *target) override;  
     virtual bool isDone() const override { return false; }
 protected:
     virtual void gotoFrame(int frameIndex);
     virtual void stepToFrame(int frameIndex);
-
+    
+    // cross to frame in deltaTime, for belnding play
+    virtual void crossToFrame(int frameIndex, double percent);
+    
     // emit call back after frameIndex played
     virtual void emitFrameEndCallFuncs(int frameIndex);
 
@@ -218,6 +227,9 @@ protected:
     int     _startFrame;
     int     _endFrame;
     bool    _loop;
+    
+    double  _crossDeltaTime;
+    int     _crossToFrameIndex;
 
     std::function<void(Frame*)> _frameEventListener;
     std::function<void()> _lastFrameListener;

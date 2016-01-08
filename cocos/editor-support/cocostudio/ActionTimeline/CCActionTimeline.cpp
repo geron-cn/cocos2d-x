@@ -81,6 +81,8 @@ ActionTimeline::ActionTimeline()
     , _endFrame(0)
     , _frameEventListener(nullptr)
     , _lastFrameListener(nullptr)
+    , _crossDeltaTime(0.0)
+    , _crossToFrameIndex(0)
 {
 }
 
@@ -441,4 +443,25 @@ void ActionTimeline::stepToFrame(int frameIndex)
     }
 }
 
+void ActionTimeline::blendingPlay(std::string animationName, bool isLoop, double deltaTime)
+{
+    auto clipIter = _animationInfos.find(animationName);
+    if (clipIter == _animationInfos.end())
+        return;
+    _crossToFrameIndex = (*clipIter).second.startIndex;
+    _crossDeltaTime = deltaTime;
+    _startFrame = _crossToFrameIndex;
+    _endFrame = (*clipIter).second.endIndex;
+    _loop = isLoop;
+    _playing = true;
+}
+
+void ActionTimeline::crossToFrame(int frameIndex, double percent)
+{
+    ssize_t size = _timelineList.size();
+    for(ssize_t i = 0; i < size; i++)
+    {
+        //_timelineList.at(i)->crossToFrame(frameIndex, percent);
+    }
+}
 NS_TIMELINE_END
