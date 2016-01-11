@@ -572,9 +572,7 @@ void TestTimelineExtensionData::onEnter()
     label->setTextColor(Color4B::ORANGE);
     node->addChild(label);
     node->setPosition(-300, -300);
-
     addChild(node);
-
 }
 
 std::string TestTimelineExtensionData::title() const

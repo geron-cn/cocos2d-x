@@ -1,5 +1,9 @@
 #include "HelloWorldScene.h"
 #include "AppMacros.h"
+#include "2d/CCParticleSystemQuad.h"
+#include "cocos2d.h"
+#include "cocostudio/CocoStudio.h"
+#include "ui/CocosGUI.h"
 
 USING_NS_CC;
 
@@ -71,8 +75,47 @@ bool HelloWorld::init()
     sprite->setPosition(Vec2(visibleSize / 2) + origin);
 
     // add the sprite as a child to this layer
-    this->addChild(sprite);
+    //this->addChild(sprite);
     
+    auto particle = ParticleSystemQuad::create("Particles/Comet.plist");
+    this->addChild(particle);
+    particle->start();
+    auto stopBtn = cocos2d::ui::Button::create();
+    this->addChild(stopBtn);
+    stopBtn->setTitleText("stop");
+    stopBtn->setPosition(Vec2(50, 50));
+    stopBtn->addClickEventListener([particle, stopBtn](Ref* sender){
+        if(particle->isActive())
+        {
+            stopBtn->setTitleText("start");
+            particle->stop();
+        }
+        else
+        {
+            stopBtn->setTitleText("stop");
+            particle->start();
+        }
+        
+    });
+    
+    auto resumeBtn = cocos2d::ui::Button::create();
+    this->addChild(resumeBtn);
+    resumeBtn->setTitleText("pause");
+    resumeBtn->setPosition(Vec2(100, 50));
+    resumeBtn->addClickEventListener([particle, resumeBtn](Ref* sender){
+        if(particle->isActive())
+        {
+            resumeBtn->setTitleText("resume");
+            particle->pause();
+        }
+        else
+        {
+            resumeBtn->setTitleText("pause");
+            particle->resume();
+        }
+        
+    });
+
     return true;
 }
 

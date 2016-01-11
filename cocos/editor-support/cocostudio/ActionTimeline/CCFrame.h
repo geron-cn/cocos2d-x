@@ -413,6 +413,17 @@ public:
 protected:
     cocos2d::BlendFunc  _blendFunc;
 };
+
+class CC_STUDIO_DLL PlayableFrame : public Frame
+{
+public:
+    static PlayableFrame* create();
+    
+    PlayableFrame();
+    
+    virtual void onEnter(Frame* nextFrame, int currentFrameINdex) override;
+    virtual Frame* clone() override;
+};
 NS_TIMELINE_END
 
 

@@ -907,5 +907,42 @@ Frame* BlendFuncFrame::clone()
     return frame;
 }
 
+//PlayableFrame
+PlayableFrame* PlayableFrame::create()
+{
+    auto frame = new (std::nothrow) PlayableFrame();
+    if(frame)
+    {
+        frame->autorelease();
+        return frame;
+    }
+    CC_SAFE_DELETE(frame);
+    return nullptr;
+}
 
+PlayableFrame::PlayableFrame()
+{
+    
+}
+
+void PlayableFrame::onEnter(cocostudio::timeline::Frame *nextFrame, int currentFrameINdex)
+{
+    auto playableNode = dynamic_cast<PlayableProtocol*>(_node);
+    if(nullptr == playableNode)
+        return;
+    
+    
+    playableNode->start();
+    playableNode->pause();
+    playableNode->resume();
+    playableNode->stop();
+        
+}
+
+Frame* PlayableFrame::clone()
+{
+    PlayableFrame* frame = PlayableFrame::create();
+    frame->cloneProperty(this);
+    return frame;
+}
 NS_TIMELINE_END
