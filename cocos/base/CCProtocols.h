@@ -267,6 +267,22 @@ public:
     virtual void updateProjection() = 0;
 };
 
+/**
+ * interface for playable items
+ */
+class CC_DLL PlayableProtocol
+{
+public:
+    virtual ~PlayableProtocol(){}
+    
+    virtual void start() = 0;
+    
+    virtual void stop() = 0;
+    
+    virtual void pause() = 0;
+    
+    virtual void resume() = 0;
+};
 NS_CC_END
 
 /// @endcond

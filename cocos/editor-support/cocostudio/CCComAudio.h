@@ -26,12 +26,13 @@ THE SOFTWARE.
 #define __CC_EXTENTIONS_CCCOMAUDIO_H__
 
 #include "CCComBase.h"
+#include "base/CCProtocols.h"
 #include "2d/CCComponent.h"
 #include "cocostudio/CocosStudioExport.h"
 
 namespace cocostudio {
 
-class CC_STUDIO_DLL ComAudio : public cocos2d::Component
+    class CC_STUDIO_DLL ComAudio : public cocos2d::Component, public cocos2d::PlayableProtocol
 {
     DECLARE_CLASS_COMPONENT_INFO
 public:
@@ -105,6 +106,15 @@ public:
     const char* getFile();
     void setLoop(bool bLoop);
     bool isLoop();
+    
+    /// @{
+    /// @name implement Playable Protocol
+    virtual void start() override;
+    virtual void stop() override;
+    virtual void pause() override;
+    virtual void resume() override;
+    /// @} end of PlaybleProtocol
+
 private:
     std::string _filePath;
     bool _loop;

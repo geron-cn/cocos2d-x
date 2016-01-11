@@ -320,5 +320,24 @@ bool ComAudio::isLoop()
 {
 	return _loop;
 }
+    void ComAudio::start()
+    {
+        playBackgroundMusic();
+    }
+    
+    void ComAudio::stop()
+    {
+        stopBackgroundMusic();
+    }
+    
+    void ComAudio::resume()
+    {
+        resumeBackgroundMusic();
+    }
+    
+    void ComAudio::pause()
+    {
+        pauseBackgroundMusic();
+    }
 
 }
