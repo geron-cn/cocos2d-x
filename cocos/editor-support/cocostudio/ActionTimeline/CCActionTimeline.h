@@ -117,9 +117,9 @@ public:
     virtual void gotoFrameAndPause(int startIndex);
 
     /** Pause the animation. */
-    virtual void pause() override;
+    virtual void pause();
     /** Resume the animation. */
-    virtual void resume() override;
+    virtual void resume();
 
     /** Whether or not Action is playing. */
     virtual bool isPlaying() const;

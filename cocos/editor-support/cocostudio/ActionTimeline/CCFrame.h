@@ -423,6 +423,14 @@ public:
     
     virtual void onEnter(Frame* nextFrame, int currentFrameINdex) override;
     virtual Frame* clone() override;
+
+    inline std::string getPlayableAct() const { return _playableAct; }
+    // @param playact, express the interface in PlayableProtocol, should be "start"  or "stop"
+    inline void setPlayableAct(std::string playact) { _playableAct = playact; }
+private:
+    std::string _playableAct;  // express the interface in PlayableProtocol
+    static const std::string START_ACT;
+    static const std::string STOP_ACT;
 };
 NS_TIMELINE_END
 

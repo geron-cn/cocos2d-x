@@ -479,7 +479,7 @@ inline ActionTimeline* ActionTimelineCache::createActionWithDataBuffer(const coc
 
     auto timeLines = nodeAction->timeLines();
     int timelineLength = timeLines->size();
-    std::multimap<std::string, cocostudio::timeline::Timeline*> properTimelineMap;// order the timelines depends property name
+    std::multimap<std::string,timeline::Timeline*> properTimelineMap;// order the timelines depends property name
     for (int i = 0; i < timelineLength; i++)
     {
         auto timelineFlatBuf = timeLines->Get(i);

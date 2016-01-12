@@ -448,6 +448,6 @@ void ActionTimeline::start()
 
 void ActionTimeline::stop()
 {
-    gotoFrameAndPause(_duration);
+    pause();
 }
 NS_TIMELINE_END

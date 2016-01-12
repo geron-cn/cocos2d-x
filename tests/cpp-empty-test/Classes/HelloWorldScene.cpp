@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui/CocosGUI.h"
+#include "cocostudio/CCComAudio.h"
 
 USING_NS_CC;
 
@@ -77,23 +78,30 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     //this->addChild(sprite);
     
-    auto particle = ParticleSystemQuad::create("Particles/Comet.plist");
+    auto particle = ParticleSystemQuad::create("Particles/Flower.plist");
+    auto sound = cocostudio::ComAudio::create();
+    sound->setFile("background.wav");
+    sound->play();
+    this->addChild(sound);
+
     this->addChild(particle);
     particle->start();
     auto stopBtn = cocos2d::ui::Button::create();
     this->addChild(stopBtn);
     stopBtn->setTitleText("stop");
     stopBtn->setPosition(Vec2(50, 50));
-    stopBtn->addClickEventListener([particle, stopBtn](Ref* sender){
+    stopBtn->addClickEventListener([particle, sound, stopBtn](Ref* sender){
         if(particle->isActive())
         {
             stopBtn->setTitleText("start");
             particle->stop();
+            sound->stop();
         }
         else
         {
             stopBtn->setTitleText("stop");
             particle->start();
+            sound->start();
         }
         
     });

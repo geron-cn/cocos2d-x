@@ -1341,14 +1341,4 @@ void ParticleSystem::stop()
 {
     stopSystem();
 }
-
-void ParticleSystem::pause()
-{
-    _isActive = false;
-}
-
-void ParticleSystem::resume()
-{
-    _isActive = true;
-}
 NS_CC_END

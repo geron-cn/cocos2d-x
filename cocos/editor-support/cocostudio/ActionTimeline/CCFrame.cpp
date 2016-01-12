@@ -908,6 +908,8 @@ Frame* BlendFuncFrame::clone()
 }
 
 //PlayableFrame
+const std::string PlayableFrame::START_ACT = "start";
+const std::string PlayableFrame::STOP_ACT = "stop";
 PlayableFrame* PlayableFrame::create()
 {
     auto frame = new (std::nothrow) PlayableFrame();
@@ -921,28 +923,28 @@ PlayableFrame* PlayableFrame::create()
 }
 
 PlayableFrame::PlayableFrame()
+    :_playableAct("")
 {
     
 }
 
-void PlayableFrame::onEnter(cocostudio::timeline::Frame *nextFrame, int currentFrameINdex)
+void PlayableFrame::onEnter(Frame *nextFrame, int currentFrameINdex)
 {
     auto playableNode = dynamic_cast<PlayableProtocol*>(_node);
     if(nullptr == playableNode)
         return;
     
-    
-    playableNode->start();
-    playableNode->pause();
-    playableNode->resume();
-    playableNode->stop();
-        
+    if(_playableAct == PlayableFrame::START_ACT)
+        playableNode->start();
+    else if(_playableAct == PlayableFrame::STOP_ACT)
+        playableNode->stop();
 }
 
 Frame* PlayableFrame::clone()
 {
     PlayableFrame* frame = PlayableFrame::create();
     frame->cloneProperty(this);
+    frame->
     return frame;
 }
 NS_TIMELINE_END

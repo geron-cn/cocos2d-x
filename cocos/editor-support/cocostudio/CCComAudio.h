@@ -109,15 +109,17 @@ public:
     
     /// @{
     /// @name implement Playable Protocol
+    // play the effect sound path in _filePath
     virtual void start() override;
+    // stop the effect sound which started with latest start()
     virtual void stop() override;
-    virtual void pause() override;
-    virtual void resume() override;
     /// @} end of PlaybleProtocol
 
 private:
     std::string _filePath;
     bool _loop;
+
+    unsigned int _startedSoundId; // !playing sound id from start(), not playEffect
 };
 
 }
