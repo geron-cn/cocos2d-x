@@ -427,12 +427,13 @@ public:
     inline std::string getPlayableAct() const { return _playableAct; }
     // @param playact, express the interface in PlayableProtocol, should be "start"  or "stop"
     inline void setPlayableAct(std::string playact) { _playableAct = playact; }
+
+    static const std::string PLAYABLE_EXTENTION;
 private:
     std::string _playableAct;  // express the interface in PlayableProtocol
     static const std::string START_ACT;
     static const std::string STOP_ACT;
 };
 NS_TIMELINE_END
-
 
 #endif /*__CCFRAME_H__*/

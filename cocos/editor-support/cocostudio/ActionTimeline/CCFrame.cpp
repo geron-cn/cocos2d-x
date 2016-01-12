@@ -910,6 +910,7 @@ Frame* BlendFuncFrame::clone()
 //PlayableFrame
 const std::string PlayableFrame::START_ACT = "start";
 const std::string PlayableFrame::STOP_ACT = "stop";
+const std::string PlayableFrame::PLAYABLE_EXTENTION = "playable_extension";
 PlayableFrame* PlayableFrame::create()
 {
     auto frame = new (std::nothrow) PlayableFrame();
@@ -923,7 +924,7 @@ PlayableFrame* PlayableFrame::create()
 }
 
 PlayableFrame::PlayableFrame()
-    :_playableAct("")
+    : _playableAct("")
 {
     
 }
@@ -931,12 +932,14 @@ PlayableFrame::PlayableFrame()
 void PlayableFrame::onEnter(Frame *nextFrame, int currentFrameINdex)
 {
     auto playableNode = dynamic_cast<PlayableProtocol*>(_node);
-    if(nullptr == playableNode)
+    if (nullptr == playableNode) // may be a playable component
+        playableNode = dynamic_cast<PlayableProtocol*>(_node->getComponent(PLAYABLE_EXTENTION));
+    if (nullptr == playableNode)
         return;
-    
-    if(_playableAct == PlayableFrame::START_ACT)
+
+    if(_playableAct == START_ACT)
         playableNode->start();
-    else if(_playableAct == PlayableFrame::STOP_ACT)
+    else if(_playableAct == STOP_ACT)
         playableNode->stop();
 }
 
@@ -944,7 +947,7 @@ Frame* PlayableFrame::clone()
 {
     PlayableFrame* frame = PlayableFrame::create();
     frame->cloneProperty(this);
-    frame->
+    frame->setPlayableAct(_playableAct);
     return frame;
 }
 NS_TIMELINE_END
