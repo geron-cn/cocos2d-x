@@ -511,7 +511,7 @@ float ScrollView::getAutoScrollStopEpsilon() const
 
 bool ScrollView::fltEqualZero(const Vec2& point) const
 {
-    return (fabsf(point.x) <= 0.0001 && fabsf(point.y) <= 0.0001);
+    return (fabsf(point.x) <= 0.0001f && fabsf(point.y) <= 0.0001f);
 }
 
 
