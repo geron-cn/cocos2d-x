@@ -34,6 +34,7 @@ UIScale9Sprite.cpp \
 UIWebView.cpp \
 UIWebViewImpl-android.cpp \
 UIEditBox/UIEditBox.cpp \
+UIEditBox/EditBoxImplCommon.cpp \
 UIEditBox/UIEditBoxImpl-android.cpp \
 UILayoutComponent.cpp \
 

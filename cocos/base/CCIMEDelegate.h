@@ -28,6 +28,7 @@ THE SOFTWARE.
 
 #include <string>
 #include "math/CCGeometry.h"
+#include "CCEventKeyboard.h"
 
 NS_CC_BEGIN
 extern const std::string CC_DLL STD_STRING_EMPTY;
@@ -111,6 +112,13 @@ protected:
     * @lua NA
     */
     virtual void deleteBackward() {}
+
+    /**
+    @brief    Called by IMEDispatcher after the user press control key.
+    * @js NA
+    * @lua NA
+    */
+    virtual void controlKey(EventKeyboard::KeyCode /*keyCode*/) {}
 
     /**
     @brief    Called by IMEDispatcher for text stored in delegate.

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "852ED3691A47A99B0D19C820A500AE9772B2A44E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C194AA32C8AFEE2F07CAE524228B2EB754461380" : 0,
+    "852ED3691A47A99B0D19C820A500AE9772B2A44E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9D381FF1-0C2E-41C0-8E62-3E046430A0AC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C194AA32C8AFEE2F07CAE524228B2EB754461380" : "cocos2d-x\/tests\/cpp-tests\/Resources\/ccs-res\/",
+    "852ED3691A47A99B0D19C820A500AE9772B2A44E" : "cocos2d-x\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "cocos2d_tests",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "build\/cocos2d_tests.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cocos2d\/cocos2d-x",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "852ED3691A47A99B0D19C820A500AE9772B2A44E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/dumganhar\/ccs-res.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C194AA32C8AFEE2F07CAE524228B2EB754461380"
+    }
+  ]
+}
