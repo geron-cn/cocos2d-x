@@ -80,6 +80,7 @@ public:
                                    std::string::size_type length);
     
     static void doLayout(Node *rootNode);
+    static Rect convertBoundingBoxToScreen(Node* node);
 
     static void changeLayoutSystemActiveState(bool bActive);
 };

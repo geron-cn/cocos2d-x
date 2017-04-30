@@ -155,16 +155,59 @@ bool UTF16ToUTF8(const std::u16string& utf16, std::string& outUtf8)
     return llvm::convertUTF16ToUTF8String(utf16, outUtf8);
 }
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID) 
+std::string getStringUTFCharsJNI(JNIEnv* env, jstring srcjStr, bool* ret)
+{
+    std::string utf8Str;
+    if(srcjStr != nullptr)
+    {
+        const unsigned short * unicodeChar = ( const unsigned short *)env->GetStringChars(srcjStr, nullptr);
+        size_t unicodeCharLength = env->GetStringLength(srcjStr);
+        const std::u16string unicodeStr((const char16_t *)unicodeChar, unicodeCharLength);
+        bool flag = UTF16ToUTF8(unicodeStr, utf8Str);
+        if (ret)
+        {
+            *ret = flag;
+        }
+        if (!flag)
+        {
+            utf8Str = "";
+        }
+        env->ReleaseStringChars(srcjStr, unicodeChar);
+    }
+    else
+    {
+        if (ret)
+        {
+            *ret = false;
+        }
+        utf8Str = "";
+    }
+    return utf8Str;
+}
+
+jstring newStringUTFJNI(JNIEnv* env, const std::string& utf8Str, bool* ret)
+{
+    std::u16string utf16Str;
+    bool flag = cocos2d::StringUtils::UTF8ToUTF16(utf8Str, utf16Str);
+
+    if (ret)
+    {
+        *ret = flag;
+    }
+
+    if(!flag)
+    {
+        utf16Str.clear();
+    }
+    jstring stringText = env->NewString((const jchar*)utf16Str.data(), utf16Str.length());
+    return stringText;
+}
+#endif
+
 std::vector<char16_t> getChar16VectorFromUTF16String(const std::u16string& utf16)
 {
-    std::vector<char16_t> ret;
-    size_t len = utf16.length();
-    ret.reserve(len);
-    for (size_t i = 0; i < len; ++i)
-    {
-        ret.push_back(utf16[i]);
-    }
-    return ret;
+    return std::vector<char16_t>(utf16.begin(), utf16.end());
 }
 
 long getCharacterCountInUTF8String(const std::string& utf8)

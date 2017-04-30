@@ -439,6 +439,7 @@ public:
     FontStroke()
 	    : _strokeEnabled(false)
         , _strokeColor(Color3B::BLACK)
+        , _strokeAlpha(255)
         , _strokeSize(0)
     {}
     
@@ -446,6 +447,7 @@ public:
     bool      _strokeEnabled;
     // stroke color
 	Color3B   _strokeColor;
+  GLubyte   _strokeAlpha;
     // stroke size
     float     _strokeSize;
     
@@ -465,6 +467,9 @@ public:
         , _vertAlignment(TextVAlignment::TOP)
     	, _dimensions(Size::ZERO)
         , _fontFillColor(Color3B::WHITE)
+        , _fontAlpha(255)
+        , _enableWrap(true)
+        , _overflow(0)
     {}
     
     // font name
@@ -479,11 +484,19 @@ public:
     Size                  _dimensions;
     // font color
     Color3B               _fontFillColor;
-    // font shadow
+    /// font alpha
+    GLubyte               _fontAlpha;
+    /// font shadow
     FontShadow            _shadow;
     // font stroke
     FontStroke            _stroke;
-    
+    /// enable text wrap
+    bool                  _enableWrap;
+    /** There are 4 overflows: none, clamp, shrink and resize_height.
+     *  The corresponding integer values are 0, 1, 2, 3 respectively
+     * For more information, please refer to Label::Overflow enum class.
+     */
+    int                  _overflow;
 };
 
 /**

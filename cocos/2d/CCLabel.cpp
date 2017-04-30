@@ -1388,4 +1388,76 @@ void Label::setBlendFunc(const BlendFunc &blendFunc)
     }
 }
 
+void Label::enableWrap(bool enable)
+{
+    if(enable == _enableWrap || _overflow == Overflow::RESIZE_HEIGHT){
+        return;
+    }
+
+    this->_enableWrap = enable;
+   
+    this->rescaleWithOriginalFontSize();
+    
+    _contentDirty = true;
+}
+
+bool Label::isWrapEnabled() const
+{
+    return this->_enableWrap;
+}
+
+void Label::setOverflow(Overflow overflow)
+{
+    if(_overflow == overflow){
+        return;
+    }
+    
+    if (_currentLabelType == LabelType::CHARMAP) {
+        if (overflow == Overflow::SHRINK) {
+            return;
+        }
+    }
+
+    if(overflow == Overflow::RESIZE_HEIGHT){
+        this->setDimensions(_labelDimensions.width,0);
+        this->enableWrap(true);
+    }
+    _overflow = overflow;
+    
+    this->rescaleWithOriginalFontSize();
+    
+    _contentDirty = true;
+}
+
+
+float Label::getRenderingFontSize()const
+{
+    float fontSize;
+    //use sprite scale for familiar bmfont size
+//    if (_currentLabelType == LabelType::BMFONT) {
+//        fontSize = _bmFontSize;
+//    }else
+    if(_currentLabelType == LabelType::TTF){
+        fontSize = this->getTTFConfig().fontSize;
+    }else if(_currentLabelType == LabelType::STRING_TEXTURE){
+        fontSize = _systemFontSize;
+    }else{ //FIXME: find a way to calculate char map font size
+        fontSize = this->getLineHeight();
+    }
+    return fontSize;
+}
+
+
+void Label::rescaleWithOriginalFontSize()
+{
+//    auto renderingFontSize = this->getRenderingFontSize();
+//    if (_originalFontSize - renderingFontSize >= 1) {
+//        this->scaleFontSizeDown(_originalFontSize);
+//    }
+}
+
+Label::Overflow Label::getOverflow()const
+{
+    return _overflow;
+}
 NS_CC_END

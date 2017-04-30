@@ -74,11 +74,43 @@ typedef struct _ttfConfig
     }
 }TTFConfig;
 
+enum class TextFormatter : char
+{
+    NewLine = '\n',
+    CarriageReturn = '\r',
+    NextCharNoChangeX = '\b'
+};
 class CC_DLL Label : public SpriteBatchNode, public LabelProtocol
 {
 public:
+    
     static const int DistanceFieldFontSize;
+    
+    enum class Overflow
+    {
+        //In NONE mode, the dimensions is (0,0) and the content size will change dynamically to fit the label.
+        NONE,
+        /**
+         *In CLAMP mode, when label content goes out of the bounding box, it will be clipped.
+         */
+        CLAMP,
+        /**
+         * In SHRINK mode, the font size will change dynamically to adapt the content size.
+         */
+        SHRINK,
+        /**
+         *In RESIZE_HEIGHT mode, you can only change the width of label and the height is changed automatically.
+         */
+        RESIZE_HEIGHT
+    };
+    /// @name Creators
+    /// @{
 
+    /**
+    * Allocates and initializes a Label, with default settings.
+    *
+    * @return An automatically released Label object.
+    */
     static Label* create();
 
     /** Creates a label with an initial string,font[font name or font file],font size, dimension in points, horizontal alignment and vertical alignment.
@@ -242,6 +274,12 @@ public:
     FontAtlas* getFontAtlas() { return _fontAtlas; }
     
     virtual void setBlendFunc(const BlendFunc &blendFunc) override;
+    virtual void enableWrap(bool enablewrap);
+    virtual bool isWrapEnabled() const;
+    virtual void setOverflow(Overflow overflow);
+    Overflow getOverflow() const;
+    void rescaleWithOriginalFontSize();
+    float getRenderingFontSize()const;
 
     virtual bool isOpacityModifyRGB() const override;
     virtual void setOpacityModifyRGB(bool isOpacityModifyRGB) override;
@@ -406,6 +444,11 @@ protected:
     bool _clipEnabled;
     bool _blendFuncDirty;
     bool _insideBounds;                     /// whether or not the sprite was inside bounds the previous frame
+
+bool _enableWrap;
+ Overflow _overflow;
+float _originalFontSize;
+
 
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Label);
