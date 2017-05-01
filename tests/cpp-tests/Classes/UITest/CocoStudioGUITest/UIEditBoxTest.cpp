@@ -61,7 +61,7 @@ bool UIEditBoxTest::init()
         _editName->setFontColor(Color3B::RED);
         _editName->setPlaceHolder("Name:");
         _editName->setPlaceholderFontColor(Color3B::WHITE);
-        _editName->setMaxLength(8);
+        //_editName->setMaxLength(8);
         _editName->setFontSize(editBoxSize.height/2);
         _editName->setText("v👐👊💝");
         _editName->setReturnType(ui::EditBox::KeyboardReturnType::DONE);

@@ -45,6 +45,8 @@ extern "C" size_t __ctype_get_mb_cur_max(void) {
 }
 #endif
 
+static const std::string helperClassName = "org/cocos2dx/lib/Cocos2dxHelper";
+
 NS_CC_BEGIN
 
 // sharedApplication pointer
@@ -114,6 +116,7 @@ LanguageType Application::getCurrentLanguage()
 {
     std::string languageName = getCurrentLanguageJNI();
     const char* pLanguageName = languageName.c_str();
+	
     LanguageType ret = LanguageType::ENGLISH;
 
     if (0 == strcmp("zh", pLanguageName))
