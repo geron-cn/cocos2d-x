@@ -1911,6 +1911,17 @@
 		C51C112D1EB24E1D00A91C7B /* UIEditBoxImpl-common.h in Headers */ = {isa = PBXBuildFile; fileRef = C51C112B1EB24E1D00A91C7B /* UIEditBoxImpl-common.h */; };
 		C51C112E1EB2534600A91C7B /* UIEditBoxImpl-common.h in Headers */ = {isa = PBXBuildFile; fileRef = C51C112B1EB24E1D00A91C7B /* UIEditBoxImpl-common.h */; };
 		C51C112F1EB2535300A91C7B /* UIEditBoxImpl-common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C51C112A1EB24E1D00A91C7B /* UIEditBoxImpl-common.cpp */; };
+		C56E81891EBE178B0090402B /* CCUIEditBoxIOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = C56E81841EBE178B0090402B /* CCUIEditBoxIOS.mm */; };
+		C56E818A1EBE178B0090402B /* CCUIMultilineTextField.mm in Sources */ = {isa = PBXBuildFile; fileRef = C56E81851EBE178B0090402B /* CCUIMultilineTextField.mm */; };
+		C56E818B1EBE178B0090402B /* CCUISingleLineTextField.mm in Sources */ = {isa = PBXBuildFile; fileRef = C56E81861EBE178B0090402B /* CCUISingleLineTextField.mm */; };
+		C56E818C1EBE178B0090402B /* UITextField+CCUITextInput.mm in Sources */ = {isa = PBXBuildFile; fileRef = C56E81871EBE178B0090402B /* UITextField+CCUITextInput.mm */; };
+		C56E818D1EBE178B0090402B /* UITextView+CCUITextInput.mm in Sources */ = {isa = PBXBuildFile; fileRef = C56E81881EBE178B0090402B /* UITextView+CCUITextInput.mm */; };
+		C56E81941EBE179E0090402B /* CCUIEditBoxIOS.h in Headers */ = {isa = PBXBuildFile; fileRef = C56E818E1EBE179E0090402B /* CCUIEditBoxIOS.h */; };
+		C56E81951EBE179E0090402B /* CCUIMultilineTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = C56E818F1EBE179E0090402B /* CCUIMultilineTextField.h */; };
+		C56E81961EBE179E0090402B /* CCUISingleLineTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = C56E81901EBE179E0090402B /* CCUISingleLineTextField.h */; };
+		C56E81971EBE179E0090402B /* CCUITextInput.h in Headers */ = {isa = PBXBuildFile; fileRef = C56E81911EBE179E0090402B /* CCUITextInput.h */; };
+		C56E81981EBE179E0090402B /* UITextField+CCUITextInput.h in Headers */ = {isa = PBXBuildFile; fileRef = C56E81921EBE179E0090402B /* UITextField+CCUITextInput.h */; };
+		C56E81991EBE179E0090402B /* UITextView+CCUITextInput.h in Headers */ = {isa = PBXBuildFile; fileRef = C56E81931EBE179E0090402B /* UITextView+CCUITextInput.h */; };
 		DA8C62A219E52C6400000516 /* ioapi_mem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA8C62A019E52C6400000516 /* ioapi_mem.cpp */; };
 		DA8C62A319E52C6400000516 /* ioapi_mem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA8C62A019E52C6400000516 /* ioapi_mem.cpp */; };
 		DA8C62A419E52C6400000516 /* ioapi_mem.h in Headers */ = {isa = PBXBuildFile; fileRef = DA8C62A119E52C6400000516 /* ioapi_mem.h */; };
@@ -2961,6 +2972,17 @@
 		B67C624519D4186F00F11FC6 /* ccShader_3D_PositionNormalTex.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ccShader_3D_PositionNormalTex.vert; sourceTree = "<group>"; };
 		C51C112A1EB24E1D00A91C7B /* UIEditBoxImpl-common.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "UIEditBoxImpl-common.cpp"; sourceTree = "<group>"; };
 		C51C112B1EB24E1D00A91C7B /* UIEditBoxImpl-common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIEditBoxImpl-common.h"; sourceTree = "<group>"; };
+		C56E81841EBE178B0090402B /* CCUIEditBoxIOS.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = CCUIEditBoxIOS.mm; path = ../cocos/ui/UIEditBox/iOS/CCUIEditBoxIOS.mm; sourceTree = "<group>"; };
+		C56E81851EBE178B0090402B /* CCUIMultilineTextField.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = CCUIMultilineTextField.mm; path = ../cocos/ui/UIEditBox/iOS/CCUIMultilineTextField.mm; sourceTree = "<group>"; };
+		C56E81861EBE178B0090402B /* CCUISingleLineTextField.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = CCUISingleLineTextField.mm; path = ../cocos/ui/UIEditBox/iOS/CCUISingleLineTextField.mm; sourceTree = "<group>"; };
+		C56E81871EBE178B0090402B /* UITextField+CCUITextInput.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "UITextField+CCUITextInput.mm"; path = "../cocos/ui/UIEditBox/iOS/UITextField+CCUITextInput.mm"; sourceTree = "<group>"; };
+		C56E81881EBE178B0090402B /* UITextView+CCUITextInput.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = "UITextView+CCUITextInput.mm"; path = "../cocos/ui/UIEditBox/iOS/UITextView+CCUITextInput.mm"; sourceTree = "<group>"; };
+		C56E818E1EBE179E0090402B /* CCUIEditBoxIOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCUIEditBoxIOS.h; path = ../cocos/ui/UIEditBox/iOS/CCUIEditBoxIOS.h; sourceTree = "<group>"; };
+		C56E818F1EBE179E0090402B /* CCUIMultilineTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCUIMultilineTextField.h; path = ../cocos/ui/UIEditBox/iOS/CCUIMultilineTextField.h; sourceTree = "<group>"; };
+		C56E81901EBE179E0090402B /* CCUISingleLineTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCUISingleLineTextField.h; path = ../cocos/ui/UIEditBox/iOS/CCUISingleLineTextField.h; sourceTree = "<group>"; };
+		C56E81911EBE179E0090402B /* CCUITextInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCUITextInput.h; path = ../cocos/ui/UIEditBox/iOS/CCUITextInput.h; sourceTree = "<group>"; };
+		C56E81921EBE179E0090402B /* UITextField+CCUITextInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UITextField+CCUITextInput.h"; path = "../cocos/ui/UIEditBox/iOS/UITextField+CCUITextInput.h"; sourceTree = "<group>"; };
+		C56E81931EBE179E0090402B /* UITextView+CCUITextInput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UITextView+CCUITextInput.h"; path = "../cocos/ui/UIEditBox/iOS/UITextView+CCUITextInput.h"; sourceTree = "<group>"; };
 		DA8C62A019E52C6400000516 /* ioapi_mem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ioapi_mem.cpp; sourceTree = "<group>"; };
 		DA8C62A119E52C6400000516 /* ioapi_mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi_mem.h; sourceTree = "<group>"; };
 		DABC9FA719E7DFA900FA252C /* CCClippingRectangleNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCClippingRectangleNode.cpp; sourceTree = "<group>"; };
@@ -3032,6 +3054,17 @@
 		1551A334158F2AB200E66CFE = {
 			isa = PBXGroup;
 			children = (
+				C56E818E1EBE179E0090402B /* CCUIEditBoxIOS.h */,
+				C56E818F1EBE179E0090402B /* CCUIMultilineTextField.h */,
+				C56E81901EBE179E0090402B /* CCUISingleLineTextField.h */,
+				C56E81911EBE179E0090402B /* CCUITextInput.h */,
+				C56E81921EBE179E0090402B /* UITextField+CCUITextInput.h */,
+				C56E81931EBE179E0090402B /* UITextView+CCUITextInput.h */,
+				C56E81841EBE178B0090402B /* CCUIEditBoxIOS.mm */,
+				C56E81851EBE178B0090402B /* CCUIMultilineTextField.mm */,
+				C56E81861EBE178B0090402B /* CCUISingleLineTextField.mm */,
+				C56E81871EBE178B0090402B /* UITextField+CCUITextInput.mm */,
+				C56E81881EBE178B0090402B /* UITextView+CCUITextInput.mm */,
 				46A15FCC1807A544005B8026 /* AUTHORS */,
 				1A57FFF7180BC5160088DEC7 /* CHANGELOG */,
 				50272539190BF1B900AAF4ED /* cocos2d.cpp */,
@@ -5602,6 +5635,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				503DD8F01926736A00CD74DD /* CCStdC-ios.h in Headers */,
+				C56E81941EBE179E0090402B /* CCUIEditBoxIOS.h in Headers */,
+				C56E81951EBE179E0090402B /* CCUIMultilineTextField.h in Headers */,
+				C56E81961EBE179E0090402B /* CCUISingleLineTextField.h in Headers */,
+				C56E81971EBE179E0090402B /* CCUITextInput.h in Headers */,
+				C56E81981EBE179E0090402B /* UITextField+CCUITextInput.h in Headers */,
+				C56E81991EBE179E0090402B /* UITextView+CCUITextInput.h in Headers */,
 				292DB14819B4574100A80320 /* UIEditBoxImpl-ios.h in Headers */,
 				15AE1A9A19AAD40300C27E9E /* b2Math.h in Headers */,
 				46A170FF1807CECB005B8026 /* CCPhysicsContact.h in Headers */,
@@ -6631,6 +6670,11 @@
 				15AE198A19AAD36A00C27E9E /* ButtonReader.cpp in Sources */,
 				15AE18D019AAD33D00C27E9E /* CCNodeLoaderLibrary.cpp in Sources */,
 				15AE192C19AAD35100C27E9E /* CCActionFrame.cpp in Sources */,
+				C56E81891EBE178B0090402B /* CCUIEditBoxIOS.mm in Sources */,
+				C56E818A1EBE178B0090402B /* CCUIMultilineTextField.mm in Sources */,
+				C56E818B1EBE178B0090402B /* CCUISingleLineTextField.mm in Sources */,
+				C56E818C1EBE178B0090402B /* UITextField+CCUITextInput.mm in Sources */,
+				C56E818D1EBE178B0090402B /* UITextView+CCUITextInput.mm in Sources */,
 				1A01C69918F57BE800EFE3A6 /* CCSet.cpp in Sources */,
 				1A01C69D18F57BE800EFE3A6 /* CCString.cpp in Sources */,
 				292DB14A19B4574100A80320 /* UIEditBoxImpl-ios.mm in Sources */,
