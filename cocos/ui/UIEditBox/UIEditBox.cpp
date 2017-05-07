@@ -549,7 +549,8 @@ static Rect getRect(Node * pNode)
 
 void EditBox::keyboardWillShow(IMEKeyboardNotificationInfo& info)
 {
-    // CCLOG("CCEditBox::keyboardWillShow");
+    
+     CCLOG("CCEditBox::keyboardWillShow");
     Rect rectTracked = getRect(this);
 	// some adjustment for margin between the keyboard and the edit box.
 	rectTracked.origin.y -= 4;
@@ -563,7 +564,7 @@ void EditBox::keyboardWillShow(IMEKeyboardNotificationInfo& info)
     
     // assume keyboard at the bottom of screen, calculate the vertical adjustment.
     _adjustHeight = info.end.getMaxY() - rectTracked.getMinY();
-    // CCLOG("CCEditBox:needAdjustVerticalPosition(%f)", _adjustHeight);
+     CCLOG("CCEditBox:needAdjustVerticalPosition(%f)", _adjustHeight);
     
     if (_editBoxImpl != nullptr)
     {

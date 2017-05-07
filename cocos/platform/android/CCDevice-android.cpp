@@ -31,7 +31,6 @@ THE SOFTWARE.
 #include <android/log.h>
 #include <jni.h>
 #include "base/ccTypes.h"
-#include "jni/DPIJni.h"
 #include "jni/Java_org_cocos2dx_lib_Cocos2dxHelper.h"
 #include "jni/JniHelper.h"
 #include "platform/CCFileUtils.h"
@@ -45,7 +44,7 @@ int Device::getDPI()
     static int dpi = -1;
     if (dpi == -1)
     {
-        dpi = (int)getDPIJNI();
+        dpi = JniHelper::callStaticIntMethod(helperClassName, "getDPI");
     }
     return dpi;
 }

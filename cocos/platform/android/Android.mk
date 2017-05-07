@@ -13,7 +13,6 @@ CCDevice-android.cpp \
 CCGLViewImpl-android.cpp \
 CCFileUtils-android.cpp \
 javaactivity-android.cpp \
-jni/DPIJni.cpp \
 jni/Java_org_cocos2dx_lib_Cocos2dxAccelerometer.cpp \
 jni/Java_org_cocos2dx_lib_Cocos2dxBitmap.cpp \
 jni/Java_org_cocos2dx_lib_Cocos2dxHelper.cpp \
@@ -21,6 +20,7 @@ jni/Java_org_cocos2dx_lib_Cocos2dxRenderer.cpp \
 jni/JniHelper.cpp \
 jni/TouchesJni.cpp
 #jni/IMEJni.cpp 
+#jni/DPIJni.cpp \
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 
