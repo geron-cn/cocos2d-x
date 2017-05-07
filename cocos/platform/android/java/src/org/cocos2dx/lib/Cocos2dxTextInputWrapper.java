@@ -26,18 +26,19 @@ package org.cocos2dx.lib;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public class Cocos2dxTextInputWraper implements TextWatcher, OnEditorActionListener {
+public class Cocos2dxTextInputWrapper implements TextWatcher, OnEditorActionListener {
     // ===========================================================
     // Constants
     // ===========================================================
 
-    private static final String TAG = Cocos2dxTextInputWraper.class.getSimpleName();
+    private static final String TAG = Cocos2dxTextInputWrapper.class.getSimpleName();
 
     // ===========================================================
     // Fields
@@ -51,7 +52,7 @@ public class Cocos2dxTextInputWraper implements TextWatcher, OnEditorActionListe
     // Constructors
     // ===========================================================
 
-    public Cocos2dxTextInputWraper(final Cocos2dxGLSurfaceView pCocos2dxGLSurfaceView) {
+    public Cocos2dxTextInputWrapper(final Cocos2dxGLSurfaceView pCocos2dxGLSurfaceView) {
         this.mCocos2dxGLSurfaceView = pCocos2dxGLSurfaceView;
     }
 
@@ -103,11 +104,6 @@ public class Cocos2dxTextInputWraper implements TextWatcher, OnEditorActionListe
 
     @Override
     public void beforeTextChanged(final CharSequence pCharSequence, final int start, final int count, final int after) {
-        /*
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "beforeTextChanged(" + pCharSequence + ")start: " + start + ",count: " + count + ",after: " + after);
-        }
-        */
         this.mText = pCharSequence.toString();
     }
 
@@ -123,11 +119,6 @@ public class Cocos2dxTextInputWraper implements TextWatcher, OnEditorActionListe
             if (null != mOriginText) {
                 for (int i = this.mOriginText.length(); i > 0; i--) {
                     this.mCocos2dxGLSurfaceView.deleteBackward();
-                    /*
-                    if (BuildConfig.DEBUG) {
-                        Log.d(TAG, "deleteBackward");
-                    }
-                    */
                 }
             }
             
@@ -146,11 +137,7 @@ public class Cocos2dxTextInputWraper implements TextWatcher, OnEditorActionListe
             
             final String insertText = text;
             this.mCocos2dxGLSurfaceView.insertText(insertText);
-            /*
-            if (BuildConfig.DEBUG) {
-                Log.d(TAG, "insertText(" + insertText + ")");
-            }
-            */
+
         }
         
         if (pActionID == EditorInfo.IME_ACTION_DONE) {
@@ -159,11 +146,4 @@ public class Cocos2dxTextInputWraper implements TextWatcher, OnEditorActionListe
         return false;
     }
 
-    // ===========================================================
-    // Methods
-    // ===========================================================
-
-    // ===========================================================
-    // Inner and Anonymous Classes
-    // ===========================================================
 }
