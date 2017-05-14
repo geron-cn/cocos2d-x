@@ -464,6 +464,21 @@ void Director::resetMatrixStack()
     initMatrixStack();
 }
 
+void Director::layoutGLUI(int x, int y, int l, int r)
+{
+    CCLOG("layout %d %d %d %d", x, y, l, r);
+    auto diffh = y;
+    auto diffp = Vec2(0, diffh);
+    auto rootnode = Director::getInstance()->getRunningScene();
+    if(rootnode == nullptr)
+        return;
+    
+    rootnode->enumerateChildren("HOLD_UI[[:digit:]]", [&diffp](Node* child) -> bool{
+        child->setPosition(child->getPosition() + diffp);
+        return false;
+    });
+}
+
 void Director::popMatrix(MATRIX_STACK_TYPE type)
 {
     if(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW == type)

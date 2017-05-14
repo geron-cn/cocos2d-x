@@ -24,6 +24,7 @@ extern "C" {
         }
     }
 
+
     JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeOnResume() {
         if (Director::getInstance()->getOpenGLView()) {
             Application::getInstance()->applicationWillEnterForeground();
@@ -31,6 +32,16 @@ extern "C" {
             cocos2d::Director::getInstance()->getEventDispatcher()->dispatchEvent(&foregroundEvent);
         }
     }
+
+
+
+     JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeLayoutGLUI(JNIEnv*  env, jobject thiz, jint w, jint h, jint oldw, jint oldh)
+    {
+        cocos2d::Director::getInstance()->layoutGLUI(w, h, oldw, oldh);
+    }
+
+
+
 
     JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeInsertText(JNIEnv* env, jobject thiz, jstring text) {
         const char* pszText = env->GetStringUTFChars(text, NULL);

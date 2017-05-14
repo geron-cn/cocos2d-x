@@ -392,6 +392,7 @@ public:
     const Mat4& getMatrix(MATRIX_STACK_TYPE type);
     void resetMatrixStack();
 
+    void layoutGLUI(int w, int h, int oldw, int oldh);
 protected:
     void purgeDirector();
     bool _purgeDirectorInNextLoop; // this flag will be set to true in end()

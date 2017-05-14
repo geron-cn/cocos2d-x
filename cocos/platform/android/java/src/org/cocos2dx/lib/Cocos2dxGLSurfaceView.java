@@ -200,7 +200,6 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
         this.setRenderMode(RENDERMODE_WHEN_DIRTY);
         //super.onPause();
     }
-
     @Override
     public boolean onTouchEvent(final MotionEvent pMotionEvent) {
         // these data are used in ACTION_MOVE and ACTION_CANCEL
@@ -349,6 +348,9 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
         return true;
     }
 
+
+
+        public static boolean setLayoutUIOnceChangeShownInput = true;
     /*
      * This function is called before Cocos2dxRenderer.nativeInit(), so the
      * width and height is correct.
@@ -357,6 +359,14 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
     protected void onSizeChanged(final int pNewSurfaceWidth, final int pNewSurfaceHeight, final int pOldSurfaceWidth, final int pOldSurfaceHeight) {
         if(!this.isInEditMode()) {
             this.mCocos2dxRenderer.setScreenWidthAndHeight(pNewSurfaceWidth, pNewSurfaceHeight);
+        }
+        else if(setLayoutUIOnceChangeShownInput)
+        {
+
+
+        Log.d("GLSurfaceView", "layout onSizeChanged ");
+            Cocos2dxGLSurfaceView.this.mCocos2dxRenderer.handleLayoutGLUIOnceChange(w, h, oldw, oldh);
+            setLayoutUIOnceChangeShownInput = false;
         }
     }
 
