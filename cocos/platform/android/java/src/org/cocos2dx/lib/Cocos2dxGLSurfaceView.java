@@ -132,7 +132,26 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
                 }
             }
         };
+        final View rootview = this.getRootView();
+        rootview.getViewTreeObserver().addOnGlobalLayoutListener(new android.view.ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int oldtop = location[1];
+                rootview.getLocationInWindow(location);
+                if(oldtop == location[1])
+                    return;
+            android.util.Log.d("editbox1 h global", String.valueOf(location[1]));
+                    mCocos2dxGLSurfaceView.queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                mCocos2dxRenderer.handleLayoutGLUIOnceChange(0, location[1], 0, 0); 
+        }
+        });
+            }
+        });
     }
+
+    final int[] location = new int[2];
 
     // ===========================================================
     // Getter & Setter

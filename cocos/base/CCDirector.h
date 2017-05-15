@@ -394,6 +394,8 @@ public:
 
     void layoutGLUI(int w, int h, int oldw, int oldh);
 protected:
+    float _offsetY;
+    
     void purgeDirector();
     bool _purgeDirectorInNextLoop; // this flag will be set to true in end()
     

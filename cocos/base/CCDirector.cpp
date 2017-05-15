@@ -466,15 +466,22 @@ void Director::resetMatrixStack()
 
 void Director::layoutGLUI(int x, int y, int l, int r)
 {
-    CCLOG("layout %d %d %d %d", x, y, l, r);
-    auto diffh = y;
-    auto diffp = Vec2(0, diffh);
+    //auto diffp = Vec2(0, y);
     auto rootnode = Director::getInstance()->getRunningScene();
     if(rootnode == nullptr)
         return;
     
-    rootnode->enumerateChildren("HOLD_UI[[:digit:]]", [&diffp](Node* child) -> bool{
-        child->setPosition(child->getPosition() + diffp);
+    
+    rootnode->enumerateChildren("/HOLD_UI[[:digit:]]", [=](Node* child) -> bool{
+        //child->setPositionOffset(diffp);
+        auto posy = child->getPosition().y -_offsetY;
+        posy += y;
+        
+        _offsetY = y;
+
+        //CCLOG("layout11 pos node %s %f", child->getName().c_str(), child->getPosition().y);
+        CCLOG("layout11 move node %f", posy);
+        child->setPosition(child->getPosition().x, posy);
         return false;
     });
 }

@@ -33,9 +33,7 @@ extern "C" {
         }
     }
 
-
-
-     JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeLayoutGLUI(JNIEnv*  env, jobject thiz, jint w, jint h, jint oldw, jint oldh)
+    JNIEXPORT void JNICALL Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeLayoutGLUI(JNIEnv*  env, jobject thiz, jint w, jint h, jint oldw, jint oldh)
     {
         cocos2d::Director::getInstance()->layoutGLUI(w, h, oldw, oldh);
     }

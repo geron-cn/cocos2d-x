@@ -123,11 +123,11 @@ public class Cocos2dxRenderer implements GLSurfaceView.Renderer {
     private static native void nativeOnSurfaceChanged(final int width, final int height);
     private static native void nativeOnPause();
     private static native void nativeOnResume();
-    private static native void nativeLayoutGLUI(final int w, final int h, final int oldw, final int oldh);
+    private static native void nativeLayoutGLUI(final int x, final int y, final int l, final int r);
 
-    public void handleLayoutGLUIOnceChange(final int w, final int h, final int oldw, final int oldh)
+    public void handleLayoutGLUIOnceChange(final int x, final int y, final int l, final int r)
     {
-        Cocos2dxRenderer.nativeLayoutGLUI(w, h, oldw, oldh);
+        Cocos2dxRenderer.nativeLayoutGLUI(x, y, l, r);
     }
 
     public void handleActionDown(final int id, final float x, final float y) {
