@@ -98,6 +98,7 @@ Director* Director::getInstance()
 }
 
 Director::Director()
+: _offsetY(0.0f)
 {
 }
 
@@ -473,14 +474,9 @@ void Director::layoutGLUI(int x, int y, int l, int r)
     
     
     rootnode->enumerateChildren("/HOLD_UI[[:digit:]]", [=](Node* child) -> bool{
-        //child->setPositionOffset(diffp);
-        auto posy = child->getPosition().y -_offsetY;
+        auto posy = child->getPosition().y - _offsetY;
         posy += y;
-        
         _offsetY = y;
-
-        //CCLOG("layout11 pos node %s %f", child->getName().c_str(), child->getPosition().y);
-        CCLOG("layout11 move node %f", posy);
         child->setPosition(child->getPosition().x, posy);
         return false;
     });

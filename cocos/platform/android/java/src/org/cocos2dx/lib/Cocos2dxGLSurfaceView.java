@@ -33,6 +33,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.graphics.Rect;
 import android.view.inputmethod.InputMethodManager;
 
 public class Cocos2dxGLSurfaceView extends GLSurfaceView {
@@ -136,12 +137,20 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
         rootview.getViewTreeObserver().addOnGlobalLayoutListener(new android.view.ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                final Rect rect = new Rect();   
+                rootview.getWindowVisibleDisplayFrame(rect); 
+                final int screenHeight = rootview.getHeight();    
                 int oldtop = location[1];
-                rootview.getLocationInWindow(location);
-                if(oldtop == location[1])
-                    return;
-            android.util.Log.d("editbox1 h global", String.valueOf(location[1]));
-                    mCocos2dxGLSurfaceView.queueEvent(new Runnable() {
+                if(screenHeight - rect.bottom < 200)
+                {
+                    if(oldtop != 0)
+                        location[1] = 0;
+                    else
+                        return;
+                }
+                else
+                    rootview.getLocationInWindow(location);
+                mCocos2dxGLSurfaceView.queueEvent(new Runnable() {
             @Override
             public void run() {
                 mCocos2dxRenderer.handleLayoutGLUIOnceChange(0, location[1], 0, 0); 
@@ -368,25 +377,15 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
     }
 
 
-
-        public static boolean setLayoutUIOnceChangeShownInput = true;
     /*
      * This function is called before Cocos2dxRenderer.nativeInit(), so the
      * width and height is correct.
      */
     @Override
-    protected void onSizeChanged(final int pNewSurfaceWidth, final int pNewSurfaceHeight, final int pOldSurfaceWidth, final int pOldSurfaceHeight) {
+    protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
         if(!this.isInEditMode()) {
-            this.mCocos2dxRenderer.setScreenWidthAndHeight(pNewSurfaceWidth, pNewSurfaceHeight);
-        }
-        else if(setLayoutUIOnceChangeShownInput)
-        {
-
-
-        Log.d("GLSurfaceView", "layout onSizeChanged ");
-            Cocos2dxGLSurfaceView.this.mCocos2dxRenderer.handleLayoutGLUIOnceChange(w, h, oldw, oldh);
-            setLayoutUIOnceChangeShownInput = false;
-        }
+            this.mCocos2dxRenderer.setScreenWidthAndHeight(w, h);
+       }
     }
 
     @Override
