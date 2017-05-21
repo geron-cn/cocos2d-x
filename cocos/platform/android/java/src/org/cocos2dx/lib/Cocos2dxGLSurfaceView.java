@@ -35,6 +35,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.graphics.Rect;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.FrameLayout;
 
 public class Cocos2dxGLSurfaceView extends GLSurfaceView {
     // ===========================================================
@@ -133,23 +134,65 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
                 }
             }
         };
-        final View rootview = this.getRootView();
-        rootview.getViewTreeObserver().addOnGlobalLayoutListener(new android.view.ViewTreeObserver.OnGlobalLayoutListener() {
+    }
+
+    public void initDoLayout(Activity activity)
+    {
+        FrameLayout content = (FrameLayout)(activity.findViewById(android.R.id.content));        
+        final View childOfContent = content.getChildAt(0); 
+        final FrameLayout.LayoutParams frameLayoutParams = (FrameLayout.LayoutParams)childOfContent.getLayoutParams(); 
+        childOfContent.getViewTreeObserver().addOnGlobalLayoutListener(new android.view.ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                if(originViewHeight == 0)
+                    originViewHeight = childOfContent.getHeight();
                 final Rect rect = new Rect();   
-                rootview.getWindowVisibleDisplayFrame(rect); 
-                final int screenHeight = rootview.getHeight();    
-                int oldtop = location[1];
-                if(screenHeight - rect.bottom < 200)
+                childOfContent.getWindowVisibleDisplayFrame(rect); 
+                final int diffh = originViewHeight - rect.bottom + rect.top; 
+                if(diffh < originViewHeight * 0.25)
                 {
-                    if(oldtop != 0)
-                        location[1] = 0;
+                    if(location[1] != 0) // layout ui
+                    {
+                        location[1] = 0; // layout for ui
+                        if(isAdjustResize)
+                        {
+                            locationcache = 0;
+                            frameLayoutParams.height = originViewHeight;
+                            childOfContent.requestLayout();    
+                        }
+                    }
                     else
+                    {
                         return;
+                    }
                 }
                 else
-                    rootview.getLocationInWindow(location);
+                {
+                    childOfContent.getLocationInWindow(location);
+                    if(isAdjustResize)
+                    {
+                        if(locationcache > location[1] || locationcache == 0)
+                        {
+                            if(locationcache != 10000)
+                                locationcache = location[1];
+                            return;
+                        }
+                        else if(location[1] < -40)
+                        {
+                            frameLayoutParams.height = ( rect.bottom - location[1]);
+                            childOfContent.requestLayout(); 
+
+                            location[1] =  rect.bottom - originViewHeight;
+                            locationcache = 10000; // requsted layout
+                        }
+                    }
+                    else 
+                    {
+                        if(locationcache == location[1])
+                            return;
+                        locationcache = location[1];
+                    }
+                }
                 mCocos2dxGLSurfaceView.queueEvent(new Runnable() {
             @Override
             public void run() {
@@ -159,8 +202,16 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
             }
         });
     }
-
+    private int originViewHeight = 0;
+    private static boolean isAdjustResize = true;
+    private static int  locationcache = 0;
     final int[] location = new int[2];
+   
+    public static void setViewInputResize(boolean resize)
+    {
+        isAdjustResize = resize;
+    }
+
 
     // ===========================================================
     // Getter & Setter
@@ -384,13 +435,8 @@ public class Cocos2dxGLSurfaceView extends GLSurfaceView {
     @Override
     protected void onSizeChanged(final int w, final int h, final int oldw, final int oldh) {
         if(!this.isInEditMode()) {
-<<<<<<< HEAD
             this.mCocos2dxRenderer.setScreenWidthAndHeight(w, h);
        }
-=======
-            this.mCocos2dxRenderer.setScreenWidthAndHeight(pNewSurfaceWidth, pNewSurfaceHeight);
-        }
->>>>>>> f8555c898d605eaa995e9b052926bf0302585eb8
     }
 
     @Override
